@@ -1,40 +1,44 @@
 const fs = require('fs');
 const path = require('path');
-const compressing = require('compressing');
+const zlib = require('zlib');
+const gzip = zlib.createGzip();
 
 var files = new Array();
 var distPath;
 var filterArray = new Array();
-var promiseArray = new Array();
+var index;
 
-function getFolder(){
-	distPath = process.argv[2];
+function getFolder() {
+    distPath = process.argv[2];
     if (fs.existsSync(distPath)) {
         files = fs.readdirSync(distPath);
         filterFiles();
+        index  = 0;
         compressFile();
     }
 }
 
+
 function filterFiles(){
     for (var i = 0; i < files.length; i++) {
-      // Avoiding to attempt compress directories
-       if (path.extname(files[i])){
-           filterArray.push(files[i]);
-       }
+        // Avoiding to attempt compress directories
+        if (path.extname(files[i])){
+            filterArray.push(files[i]);
+        }
     }
 }
 
 function compressFile (){
     for (var i=0; i<filterArray.length; i++) {
-      console.log('compressing file: ' + distPath + '/' + filterArray[i]);
+        let fileSrc = distPath + '/' + filterArray[i]
+        console.log('compressing file: ' + fileSrc);
 
-      promiseArray.push(compressing.gzip.compressFile(distPath + '/' + filterArray[i], distPath + '/' +  filterArray[i] + '.gz'));
+        const inp = fs.createReadStream(fileSrc);
+        const out = fs.createWriteStream(fileSrc + '.gz');
+
+        inp.pipe(gzip).pipe(out);
     }
 
-    Promise.all([promiseArray]).then( () => {
-      console.log('Compressing files is finished');
-    });
 }
 
 module.exports.main = getFolder;

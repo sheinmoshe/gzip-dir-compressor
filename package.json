@@ -1,13 +1,21 @@
 {
   "name": "gzip-dir-compressor",
-  "version": "0.0.14",
+  "version": "0.2.3",
   "description": "Receives a directory and compress all the files in it with gzip. Adding the compressed files to the recived directory ",
   "main": "bin/compressor.js",
+  "homepage": "https://github.com/sheinmoshe/gzip-dir-compressor",
   "keywords": [
     "gzip",
     "compressor",
     "build"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sheinmoshe/gzip-dir-compressor"
+  },
+  "bugs": {
+    "url": "https://github.com/sheinmoshe/gzip-dir-compressor/issues"
+  },
   "bin": {
     "gzip-dir-compressor": "./bin/gzip-dir-compressor"
   },
@@ -15,12 +23,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {
-	"name": "Moshe Shein",
-	"url": "https://github.com/sheinmoshe/gzip-dir-compressor.git"
+    "name": "Moshe Shein",
+    "url": "https://github.com/sheinmoshe"
   },
   "license": "ISC",
   "dependencies": {
-    "compressing": "^1.2.2",
     "fs": "0.0.1-security"
   }
 }

@@ -9,7 +9,7 @@
 
 	$ npm i gzip-dir-compressor
 	
-# Usage example: 
+# Usage example:
 
-	CLI: node bin\composer ../app/dist
+	CLI: node bin\compressor ../app/dist
 	packege.json: "build:prod": "npm run build -- --prod && gzip-dir-compressor/bin/compressor ../app/dist",
